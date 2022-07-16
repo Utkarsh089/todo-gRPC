@@ -1,0 +1,32 @@
+//specifying the syntax => proto3 (latest protocol buffer version)
+syntax = "proto3";
+
+// defining the package name
+package todoPackage;
+// this package can include multiple services
+
+// in this we build one service that is todo service
+
+service Todo {
+    // in the service we have multiple methods
+    // each method take some parameter and return some parameter
+
+    rpc createTodo (TodoItem) returns (TodoItem);
+    rpc readTodos ( Empty ) returns ( TodoItems );
+    rpc readTodosStream ( Empty ) returns ( stream TodoItem );
+}
+
+// Empty denotes void or nothing
+// because there is nothing like void in protocol buffer
+message Empty {}
+
+message TodoItem {
+    int32 id = 1;
+    string text = 2;
+}
+
+message TodoItems {
+    // repeated denotes the variable is an array or list
+    // in the protocol buffer
+    repeated TodoItem items = 1;
+}
